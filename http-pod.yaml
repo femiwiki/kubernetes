@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: http
+  name: http
+spec:
+  containers:
+  - env:
+    - name: CADDYPATH
+      value: /etc/caddycerts
+    image: femiwiki/caddy:1.0.3
+    name: http
+    ports:
+    - containerPort: 80
+    - containerPort: 443
+    resources: {}
+    volumeMounts:
+    - mountPath: /etc/Caddyfile
+      name: http-claim0
+      readOnly: true
+    - mountPath: /srv/femiwiki.com
+      name: files
+    - mountPath: /etc/caddycerts
+      name: caddy
+  restartPolicy: OnFailure
+  volumes:
+  - name: http-claim0
+    persistentVolumeClaim:
+      claimName: http-claim0
+      readOnly: true
+  - name: files
+    persistentVolumeClaim:
+      claimName: files
+  - name: caddy
+    persistentVolumeClaim:
+      claimName: caddy
+status: {}
