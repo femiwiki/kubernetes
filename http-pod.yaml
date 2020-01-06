@@ -1,9 +1,6 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: http
   name: http
 spec:
   containers:
@@ -15,7 +12,6 @@ spec:
     ports:
     - containerPort: 80
     - containerPort: 443
-    resources: {}
     volumeMounts:
     - mountPath: /etc/Caddyfile
       name: http-claim0
@@ -36,4 +32,3 @@ spec:
   - name: caddy
     persistentVolumeClaim:
       claimName: caddy
-status: {}
