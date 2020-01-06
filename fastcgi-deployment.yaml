@@ -6,13 +6,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fastcgi-claim0
+      app: fastcgi
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: fastcgi-claim0
+        app: fastcgi
     spec:
       containers:
       - image: femiwiki/mediawiki:build-29
