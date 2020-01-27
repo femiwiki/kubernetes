@@ -18,19 +18,12 @@ spec:
       - image: femiwiki/mediawiki:build-29
         name: fastcgi
         volumeMounts:
-        - mountPath: /a
-          name: fastcgi-claim0
-          readOnly: true
         - mountPath: /srv/femiwiki.com
           name: files
         - mountPath: /tmp/cache
           name: l18n-cache
       restartPolicy: Always
       volumes:
-      - name: fastcgi-claim0
-        persistentVolumeClaim:
-          claimName: fastcgi-claim0
-          readOnly: true
       - name: files
         persistentVolumeClaim:
           claimName: files

@@ -13,19 +13,12 @@ spec:
     - containerPort: 80
     - containerPort: 443
     volumeMounts:
-    - mountPath: /etc/Caddyfile
-      name: http-claim0
-      readOnly: true
     - mountPath: /srv/femiwiki.com
       name: files
     - mountPath: /etc/caddycerts
       name: caddy
   restartPolicy: OnFailure
   volumes:
-  - name: http-claim0
-    persistentVolumeClaim:
-      claimName: http-claim0
-      readOnly: true
   - name: files
     persistentVolumeClaim:
       claimName: files
