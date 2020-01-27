@@ -6,8 +6,6 @@ spec:
   selector:
     matchLabels:
       app: fastcgi
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
