@@ -19,6 +19,7 @@ spec:
         env:
         - name: MYSQL_DATABASE
           value: femiwiki
+        # NOTE: 개발용으로만 사용되는 옵션이고 실제 프로덕션에서는 무시되는 옵션들임
         - name: MYSQL_PASSWORD
           value: DB_PASSWORD
         - name: MYSQL_ROOT_PASSWORD
@@ -34,4 +35,3 @@ spec:
       - name: database
         persistentVolumeClaim:
           claimName: database
-
