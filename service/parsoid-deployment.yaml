@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: parsoid
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: parsoid
@@ -15,4 +14,3 @@ spec:
       containers:
       - name: parsoid
         image: femiwiki/parsoid:build-1
-      restartPolicy: Always

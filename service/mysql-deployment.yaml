@@ -3,12 +3,11 @@ kind: Deployment
 metadata:
   name: mysql
 spec:
-  replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: mysql 
+      app: mysql
   template:
     metadata:
       labels:
@@ -31,7 +30,6 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: database
-      restartPolicy: Always
       volumes:
       - name: database
         persistentVolumeClaim:

@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: memcached
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: memcached
@@ -15,4 +14,3 @@ spec:
       containers:
       - image: memcached:1-alpine
         name: memcached
-      restartPolicy: Always

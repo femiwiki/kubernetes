@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: fastcgi
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: fastcgi
@@ -22,7 +21,6 @@ spec:
           name: files
         - mountPath: /tmp/cache
           name: l18n-cache
-      restartPolicy: Always
       volumes:
       - name: files
         persistentVolumeClaim:
