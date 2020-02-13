@@ -1,5 +1,8 @@
 # TODO: 한 Pod 안에 caddy와 php-fpm을 둘다 켜야함
 # TODO: Pod이 아니라 Deployment로 켜야함
+# TODO: Treafik Ingress Controller 붙이기
+# TODO: secret.php 볼륨마운트 하지말고 Kubernetes Secret으로 관리하기
+# TODO: Caddyfile 볼륨마운트 하지말고 ConfigMap으로 관리하기
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -66,6 +69,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
+      # TODO: 사이즈 확정하기
       storage: 400Mi
 ---
 apiVersion: v1
@@ -78,6 +82,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
+      # TODO: 사이즈 확정하기
       storage: 100Mi
 ---
 apiVersion: v1
@@ -90,4 +95,5 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
+      # TODO: 사이즈 확정하기
       storage: 2Gi

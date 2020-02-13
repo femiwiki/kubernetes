@@ -61,4 +61,5 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
+      # TODO: 사이즈 확정하기
       storage: 100Mi
