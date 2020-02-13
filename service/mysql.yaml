@@ -3,6 +3,7 @@ kind: Namespace
 metadata:
   name: mysql
 ---
+# TODO: Statefulset으로 고치기
 apiVersion: apps/v1
 kind: Deployment
 metadata:

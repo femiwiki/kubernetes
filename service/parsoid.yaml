@@ -1,3 +1,4 @@
+# TODO: $MEDIAWIKI_APIS_URI 환경변수 고쳐야함
 apiVersion: v1
 kind: Namespace
 metadata:
