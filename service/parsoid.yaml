@@ -1,15 +1,9 @@
 # TODO: $MEDIAWIKI_APIS_URI 환경변수 고쳐야함
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: parsoid
-  nampspace: parsoid
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: parsoid
-  nampspace: parsoid
+  nampspace: femiwiki
 spec:
   selector:
     matchLabels:
@@ -27,7 +21,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: parsoid
-  namespace: parsoid
+  namespace: femiwiki
 spec:
   ports:
   - name: parsoid
