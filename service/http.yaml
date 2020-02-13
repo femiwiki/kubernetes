@@ -1,0 +1,103 @@
+# TODO: 한 Pod 안에 caddy와 php-fpm을 둘다 켜야함
+# TODO: Pod이 아니라 Deployment로 켜야함
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastcgi
+spec:
+  selector:
+    matchLabels:
+      app: fastcgi
+  template:
+    metadata:
+      labels:
+        app: fastcgi
+    spec:
+      containers:
+      - image: femiwiki/mediawiki:build-29
+        name: fastcgi
+        volumeMounts:
+        - mountPath: /srv/femiwiki.com
+          name: files
+        - mountPath: /tmp/cache
+          name: l18n-cache
+      volumes:
+      - name: files
+        persistentVolumeClaim:
+          claimName: files
+      - name: l18n-cache
+        persistentVolumeClaim:
+          claimName: l18n-cache
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: http
+spec:
+  containers:
+  - env:
+    - name: CADDYPATH
+      value: /etc/caddycerts
+    image: femiwiki/caddy:1.0.3
+    name: http
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: /srv/femiwiki.com
+      name: files
+    - mountPath: /etc/caddycerts
+      name: caddy
+  restartPolicy: OnFailure
+  volumes:
+  - name: files
+    persistentVolumeClaim:
+      claimName: files
+  - name: caddy
+    persistentVolumeClaim:
+      claimName: caddy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 80
+  selector:
+    app: http
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: l18n-cache
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: caddy
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: files
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
