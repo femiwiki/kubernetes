@@ -42,7 +42,18 @@ spec:
         persistentVolumeClaim:
           claimName: database
 ---
-# TODO: 서비스 만들기
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: mysql
+spec:
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: 3306
+  selector:
+    app: mysql
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
