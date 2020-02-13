@@ -1,33 +1,3 @@
-# TODO: Statefulset으로 고치기
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mysql
-  namespace: femiwiki
-spec:
-  strategy:
-    type: Recreate
-  selector:
-    matchLabels:
-      app: mysql
-  template:
-    metadata:
-      labels:
-        app: mysql
-    spec:
-      containers:
-      - name: mysql
-        args:
-        - --default-authentication-plugin=mysql_native_password
-        image: mysql:8.0.17
-        volumeMounts:
-        - mountPath: /var/lib/mysql
-          name: database
-      volumes:
-      - name: database
-        persistentVolumeClaim:
-          claimName: database
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -41,15 +11,43 @@ spec:
   selector:
     app: mysql
 ---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: femiwiki
+spec:
+  serviceName: mysql
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        args:
+        - --default-authentication-plugin=mysql_native_password
+        image: mysql:8.0.19
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          # TODO: https://github.com/upnl/kubernetes/pull/10 이 문제가 재발하지 않는지 검사하기
+          name: mysql
+      volumes:
+      - name: mysql
+        persistentVolumeClaim:
+          claimName: mysql
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: database
+  name: mysql
   namespace: femiwiki
 spec:
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      # TODO: 사이즈 확정하기
-      storage: 100Mi
+      storage: 8Gi
