@@ -1,20 +1,20 @@
-# TODO: 얘도 Statefulset으로 고치기
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: memcached
-  namespace: femiwiki
-spec:
-  selector:
-    matchLabels:
-      app: memcached
-  template:
-    metadata:
-      labels:
-        app: memcached
-    spec:
-      containers:
-      - image: memcached:1-alpine
-        name: memcached
----
-# TODO: 서비스 만들기
+## TODO: 얘도 Statefulset으로 고치기
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: memcached
+#  namespace: femiwiki
+#spec:
+#  selector:
+#    matchLabels:
+#      app: memcached
+#  template:
+#    metadata:
+#      labels:
+#        app: memcached
+#    spec:
+#      containers:
+#      - image: memcached:1-alpine
+#        name: memcached
+#---
+## TODO: 서비스 만들기

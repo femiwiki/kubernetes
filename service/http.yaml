@@ -1,99 +1,99 @@
-# TODO: 한 Pod 안에 caddy와 php-fpm을 둘다 켜야함
-# TODO: Pod이 아니라 Deployment로 켜야함
-# TODO: Treafik Ingress Controller 붙이기
-# TODO: secret.php 볼륨마운트 하지말고 Kubernetes Secret으로 관리하기
-# TODO: Caddyfile 볼륨마운트 하지말고 ConfigMap으로 관리하기
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: fastcgi
-  namespace: femiwiki
-spec:
-  selector:
-    matchLabels:
-      app: fastcgi
-  template:
-    metadata:
-      labels:
-        app: fastcgi
-    spec:
-      containers:
-      - name: fastcgi
-        image: femiwiki/mediawiki:build-29
-        volumeMounts:
-        # TODO: 없애고싶음
-        - mountPath: /srv/femiwiki.com
-          name: files
-        - mountPath: /tmp/cache
-          name: l18n-cache
-      - name: http
-        image: femiwiki/caddy:1.0.3
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        # TODO: 없애고싶음
-        - mountPath: /srv/femiwiki.com
-          name: files
-      volumes:
-      # TODO: 없애고싶음
-      - name: files
-        persistentVolumeClaim:
-          claimName: files
-      - name: l18n-cache
-        persistentVolumeClaim:
-          claimName: l18n-cache
-      - name: caddy
-        persistentVolumeClaim:
-          claimName: caddy
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: http
-  namespace: femiwiki
-spec:
-  ports:
-  - name: "80"
-    port: 80
-    targetPort: 80
-  selector:
-    app: http
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: l18n-cache
-  namespace: femiwiki
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      # TODO: 사이즈 확정하기
-      storage: 400Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: caddy
-  namespace: femiwiki
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      # TODO: 사이즈 확정하기
-      storage: 100Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: files
-  namespace: femiwiki
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      # TODO: 사이즈 확정하기
-      storage: 2Gi
+## TODO: 한 Pod 안에 caddy와 php-fpm을 둘다 켜야함
+## TODO: Pod이 아니라 Deployment로 켜야함
+## TODO: Treafik Ingress Controller 붙이기
+## TODO: secret.php 볼륨마운트 하지말고 Kubernetes Secret으로 관리하기
+## TODO: Caddyfile 볼륨마운트 하지말고 ConfigMap으로 관리하기
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: fastcgi
+#  namespace: femiwiki
+#spec:
+#  selector:
+#    matchLabels:
+#      app: fastcgi
+#  template:
+#    metadata:
+#      labels:
+#        app: fastcgi
+#    spec:
+#      containers:
+#      - name: fastcgi
+#        image: femiwiki/mediawiki:build-29
+#        volumeMounts:
+#        # TODO: 없애고싶음
+#        - mountPath: /srv/femiwiki.com
+#          name: files
+#        - mountPath: /tmp/cache
+#          name: l18n-cache
+#      - name: http
+#        image: femiwiki/caddy:1.0.3
+#        ports:
+#        - containerPort: 80
+#        volumeMounts:
+#        # TODO: 없애고싶음
+#        - mountPath: /srv/femiwiki.com
+#          name: files
+#      volumes:
+#      # TODO: 없애고싶음
+#      - name: files
+#        persistentVolumeClaim:
+#          claimName: files
+#      - name: l18n-cache
+#        persistentVolumeClaim:
+#          claimName: l18n-cache
+#      - name: caddy
+#        persistentVolumeClaim:
+#          claimName: caddy
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: http
+#  namespace: femiwiki
+#spec:
+#  ports:
+#  - name: "80"
+#    port: 80
+#    targetPort: 80
+#  selector:
+#    app: http
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: l18n-cache
+#  namespace: femiwiki
+#spec:
+#  accessModes:
+#  - ReadWriteOnce
+#  resources:
+#    requests:
+#      # TODO: 사이즈 확정하기
+#      storage: 400Mi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: caddy
+#  namespace: femiwiki
+#spec:
+#  accessModes:
+#  - ReadWriteOnce
+#  resources:
+#    requests:
+#      # TODO: 사이즈 확정하기
+#      storage: 100Mi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: files
+#  namespace: femiwiki
+#spec:
+#  accessModes:
+#  - ReadWriteOnce
+#  resources:
+#    requests:
+#      # TODO: 사이즈 확정하기
+#      storage: 2Gi

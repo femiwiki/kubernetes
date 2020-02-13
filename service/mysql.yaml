@@ -19,15 +19,17 @@ spec:
       - args:
         - --default-authentication-plugin=mysql_native_password
         env:
+        # TODO: kustomize로 프로덕션일떄엔 아래 문장이 안나오게 해주자~!
+        # NOTE: 개발용으로만 사용되는 옵션이고 실제 프로덕션에서는 무시되는 옵션들임
         - name: MYSQL_DATABASE
           value: femiwiki
-        # NOTE: 개발용으로만 사용되는 옵션이고 실제 프로덕션에서는 무시되는 옵션들임
         - name: MYSQL_PASSWORD
           value: DB_PASSWORD
         - name: MYSQL_ROOT_PASSWORD
           value: localfemiwikipassword
         - name: MYSQL_USER
           value: DB_USERNAME
+        # NOTE: 여기까지 무시됨
         image: mysql:8.0.17
         name: mysql
         volumeMounts:

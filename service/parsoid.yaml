@@ -1,31 +1,31 @@
-# TODO: $MEDIAWIKI_APIS_URI 환경변수 고쳐야함
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: parsoid
-  nampspace: femiwiki
-spec:
-  selector:
-    matchLabels:
-      app: parsoid
-  template:
-    metadata:
-      labels:
-        app: parsoid
-    spec:
-      containers:
-      - name: parsoid
-        image: femiwiki/parsoid:build-1
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: parsoid
-  namespace: femiwiki
-spec:
-  ports:
-  - name: parsoid
-    port: 8000
-    targetPort: 8000
-  selector:
-    app: parsoid
+## TODO: $MEDIAWIKI_APIS_URI 환경변수 고쳐야함
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: parsoid
+#  nampspace: femiwiki
+#spec:
+#  selector:
+#    matchLabels:
+#      app: parsoid
+#  template:
+#    metadata:
+#      labels:
+#        app: parsoid
+#    spec:
+#      containers:
+#      - name: parsoid
+#        image: femiwiki/parsoid:build-1
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: parsoid
+#  namespace: femiwiki
+#spec:
+#  ports:
+#  - name: parsoid
+#    port: 8000
+#    targetPort: 8000
+#  selector:
+#    app: parsoid
