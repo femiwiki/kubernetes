@@ -15,48 +15,33 @@ spec:
         app: fastcgi
     spec:
       containers:
-      - image: femiwiki/mediawiki:build-29
-        name: fastcgi
+      - name: fastcgi
+        image: femiwiki/mediawiki:build-29
         volumeMounts:
+        # TODO: 없애고싶음
         - mountPath: /srv/femiwiki.com
           name: files
         - mountPath: /tmp/cache
           name: l18n-cache
+      - name: http
+        image: femiwiki/caddy:1.0.3
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        # TODO: 없애고싶음
+        - mountPath: /srv/femiwiki.com
+          name: files
       volumes:
+      # TODO: 없애고싶음
       - name: files
         persistentVolumeClaim:
           claimName: files
       - name: l18n-cache
         persistentVolumeClaim:
           claimName: l18n-cache
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: http
-  namespace: femiwiki
-spec:
-  containers:
-  - env:
-    - name: CADDYPATH
-      value: /etc/caddycerts
-    image: femiwiki/caddy:1.0.3
-    name: http
-    ports:
-    - containerPort: 80
-    volumeMounts:
-    - mountPath: /srv/femiwiki.com
-      name: files
-    - mountPath: /etc/caddycerts
-      name: caddy
-  restartPolicy: OnFailure
-  volumes:
-  - name: files
-    persistentVolumeClaim:
-      claimName: files
-  - name: caddy
-    persistentVolumeClaim:
-      claimName: caddy
+      - name: caddy
+        persistentVolumeClaim:
+          claimName: caddy
 ---
 apiVersion: v1
 kind: Service
