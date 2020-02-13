@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: femiwiki
+spec:
+  template:
+    spec:
+      containers:
+      - name: mysql
+        env:
+        - name: MYSQL_DATABASE
+          value: femiwiki
+        - name: MYSQL_PASSWORD
+          value: DB_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
+          value: localfemiwikipassword
+        - name: MYSQL_USER
+          value: DB_USERNAME
