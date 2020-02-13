@@ -1,7 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mysql
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
+  namespace: mysql
 spec:
   strategy:
     type: Recreate
@@ -42,6 +48,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: database
+  namespace: mysql
 spec:
   accessModes:
   - ReadWriteOnce

@@ -1,9 +1,15 @@
 # TODO: 한 Pod 안에 caddy와 php-fpm을 둘다 켜야함
 # TODO: Pod이 아니라 Deployment로 켜야함
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: http
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fastcgi
+  namespace: http
 spec:
   selector:
     matchLabels:
@@ -33,6 +39,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: http
+  namespace: http
 spec:
   containers:
   - env:
@@ -60,6 +67,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: http
+  namespace: http
 spec:
   ports:
   - name: "80"
@@ -67,12 +75,12 @@ spec:
     targetPort: 80
   selector:
     app: http
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: l18n-cache
+  namespace: http
 spec:
   accessModes:
   - ReadWriteOnce
@@ -84,6 +92,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: caddy
+  namespace: http
 spec:
   accessModes:
   - ReadWriteOnce
@@ -95,6 +104,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: files
+  namespace: http
 spec:
   accessModes:
   - ReadWriteOnce
