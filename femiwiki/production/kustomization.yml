@@ -2,4 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - namespace.yml
+- configs/local-settings.yml
+- configs/sitelist.yml
+- secrets/secret-local-settings.yml
+- secrets/bot-secret.yml
 - mysql.yml
+- caddyfile.yml
