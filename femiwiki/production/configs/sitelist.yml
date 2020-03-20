@@ -1,9 +1,16 @@
-<sites version="1.0" xmlns="https://www.mediawiki.org/xml/sitelist-1.0/">
-	<site type="mediawiki">
-		<globalid>femiwiki</globalid>
-		<group>femiwiki</group>
-		<language>ko</language>
-		<path type="file_path">https://femiwiki.com/w/$1</path>
-		<path type="page_path">https://femiwiki.com/w/$1</path>
-	</site>
-</sites>
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sitelist
+  namespace: femiwiki
+data:
+  sitelist: |
+    <sites version="1.0" xmlns="https://www.mediawiki.org/xml/sitelist-1.0/">
+      <site type="mediawiki">
+        <globalid>femiwiki</globalid>
+        <group>femiwiki</group>
+        <language>ko</language>
+        <path type="file_path">https://femiwiki.com/w/$1</path>
+        <path type="page_path">https://femiwiki.com/w/$1</path>
+      </site>
+    </sites>
