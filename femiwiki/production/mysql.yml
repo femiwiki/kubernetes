@@ -37,17 +37,6 @@ spec:
           name: mysql
       volumes:
       - name: mysql
-        persistentVolumeClaim:
-          claimName: mysql
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql
-  namespace: femiwiki
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 8Gi
+        hostPath:
+          path: /srv/femiwiki.com/mysql
+          type: DirectoryOrCreate

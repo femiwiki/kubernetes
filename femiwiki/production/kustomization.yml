@@ -8,3 +8,4 @@ resources:
 - secrets/bot-secret.yml
 - mysql.yml
 - caddyfile.yml
+# - backupbot.yml

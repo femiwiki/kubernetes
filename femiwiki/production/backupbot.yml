@@ -1,0 +1,18 @@
+# TODO
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: backupbot
+#   namespace: femiwiki
+# spec:
+#   selector:
+#     matchLabels:
+#       app: backupbot
+#   template:
+#     metadata:
+#       labels:
+#         app: backupbot
+#     spec:
+#       containers:
+#       - name: backupbot
+#         image: femiwiki/backupbot:202002160922214316a8
