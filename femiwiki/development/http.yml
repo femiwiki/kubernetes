@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fastcgi
+  namespace: femiwiki
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              serviceName: http
+              servicePort: 80

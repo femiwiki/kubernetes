@@ -4,14 +4,14 @@ metadata:
   name: caddyfile
   namespace: femiwiki
 data:
-  caddyfile: |
-    femiwiki.com *.femiwiki.com http://http
+  Caddyfile: |
+    femiwiki.com *.femiwiki.com
     tls {
       dns route53
     }
     root /srv/femiwiki.com
     index index.php
-    fastcgi / fastcgi:9000 php
+    fastcgi / localhost:9000 php
     gzip
     header / {
       # HSTS

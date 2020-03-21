@@ -4,11 +4,12 @@ metadata:
   name: caddyfile
   namespace: femiwiki
 data:
-  caddyfile: |
+  Caddyfile: |
     *:80
+    tls off
     root /srv/femiwiki.com
     index index.php
-    fastcgi / fastcgi:9000 php
+    fastcgi / localhost:9000 php
     gzip
     header / {
       # Enable XSS filtering for legacy browsers

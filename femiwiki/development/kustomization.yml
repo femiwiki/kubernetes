@@ -4,4 +4,5 @@ bases:
 - ../production
 patchesStrategicMerge:
 - mysql.yml
+- http.yml
 - caddyfile.yml
