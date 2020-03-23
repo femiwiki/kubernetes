@@ -49,8 +49,8 @@ spec:
       labels:
         app: fastcgi
     spec:
-      # https://stackoverflow.com/questions/57061680 solution
       initContainers:
+        # https://stackoverflow.com/questions/57061680 solution
         - name: init-fastcgi
           image: femiwiki/mediawiki:202003112320210c8870
           volumeMounts:
@@ -106,7 +106,6 @@ spec:
                   items:
                     - key: sitelist
                       path: sitelist.xml
-        # TODO: PVC로 바꿀 필요 있음
         - name: l18n-cache
           hostPath:
             path: /srv/femiwiki.com/l18n-cache
