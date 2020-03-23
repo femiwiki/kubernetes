@@ -1,18 +1,28 @@
-# TODO
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: backupbot
-#   namespace: femiwiki
-# spec:
-#   selector:
-#     matchLabels:
-#       app: backupbot
-#   template:
-#     metadata:
-#       labels:
-#         app: backupbot
-#     spec:
-#       containers:
-#       - name: backupbot
-#         image: femiwiki/backupbot:202002160922214316a8
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backupbot
+  namespace: femiwiki
+spec:
+  selector:
+    matchLabels:
+      app: backupbot
+  template:
+    metadata:
+      labels:
+        app: backupbot
+    spec:
+      containers:
+        - name: backupbot
+          image: femiwiki/backupbot:202002160922214316a8
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: bot-secret
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bot-secret
+                  key: DB_PASSWORD

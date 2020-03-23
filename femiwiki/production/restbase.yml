@@ -1,2 +1,32 @@
-# TODO: RESTBase 붙이기
-# TODO: PVC 붙이게되거든 실제 서버 보고 제대로된 크기 잡아주기 사이즈 확정하기
+# TODO: PVC 붙이게 되거든 실제 서버 보고 제대로 된 크기 잡아주기 사이즈 확정하기
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: restbase
+  namespace: femiwiki
+spec:
+  serviceName: restbase
+  selector:
+    matchLabels:
+      app: restbase
+  template:
+    metadata:
+      labels:
+        app: restbase
+    spec:
+      containers:
+        - name: restbase
+          image: femiwiki/restbase:build-2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restbase
+  namespace: femiwiki
+spec:
+  ports:
+    - name: restbase
+      port: 7231
+      targetPort: 7231
+  selector:
+    app: restbase

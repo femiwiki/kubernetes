@@ -10,3 +10,10 @@ spec:
           - backend:
               serviceName: http
               servicePort: 80
+          # Proxy requests to RESTBase
+          # Reference:
+          #   https://www.mediawiki.org/wiki/RESTBase/Installation#Proxy_requests_to_RESTBase_from_your_webserver
+          - path: /femiwiki.com
+            backend:
+              serviceName: restbase
+              servicePort: 7231
