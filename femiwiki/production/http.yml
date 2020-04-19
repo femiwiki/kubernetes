@@ -67,20 +67,20 @@ spec:
       initContainers:
         # https://stackoverflow.com/questions/57061680 solution
         - name: init-fastcgi
-          image: femiwiki/mediawiki:202003112320210c8870
+          image: femiwiki/mediawiki:2020-03-27T13-48d5c3bd9a
           volumeMounts:
             - name: fastcgi
               mountPath: /share
           command: [cp, -a, /srv/femiwiki.com, /share]
         - name: init-cache
-          image: femiwiki/mediawiki:202003112320210c8870
+          image: femiwiki/mediawiki:2020-03-27T13-48d5c3bd9a
           volumeMounts:
             - name: l18n-cache
               mountPath: /tmp/cache
           command: ["sh", "-c", "chown -R www-data:www-data /tmp/cache"]
       containers:
         - name: fastcgi
-          image: femiwiki/mediawiki:202003112320210c8870
+          image: femiwiki/mediawiki:2020-03-27T13-48d5c3bd9a
           volumeMounts:
             - name: mediawiki-configs
               mountPath: /a/
