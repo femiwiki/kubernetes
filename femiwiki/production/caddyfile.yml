@@ -5,17 +5,13 @@ metadata:
   namespace: femiwiki
 data:
   Caddyfile: |
-    femiwiki.com *.femiwiki.com
-    tls {
-      dns route53
-    }
+    *:80
+    tls off
     root /srv/femiwiki.com
     index index.php
     fastcgi / localhost:9000 php
     gzip
     header / {
-      # HSTS
-      Strict-Transport-Security "max-age=15768000"
       # Enable XSS filtering for legacy browsers
       X-XSS-Protection "1; mode=block"
       # Block content sniffing, and enable Cross-Origin Read Blocking

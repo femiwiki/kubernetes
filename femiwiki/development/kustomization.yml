@@ -5,5 +5,4 @@ bases:
 patchesStrategicMerge:
 - mysql.yml
 - http.yml
-- caddyfile.yml
 - backupbot.yml

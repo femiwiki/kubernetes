@@ -18,6 +18,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  # TODO Add HSTS header
   name: fastcgi
   namespace: femiwiki
 spec:
@@ -35,6 +36,12 @@ spec:
             backend:
               serviceName: restbase
               servicePort: 7231
+  tls:
+    - hosts:
+        - femiwiki.com
+        - "*.femiwiki.com"
+      secretName: acme-crt-secret
+
 ---
 apiVersion: v1
 kind: Service
