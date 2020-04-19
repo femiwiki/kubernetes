@@ -8,12 +8,11 @@ metadata:
 spec:
   secretName: acme-crt-secret
   dnsNames:
-  - '*.femiwiki.com'
-  - femiwiki.com
+    - "*.femiwiki.com"
+    - femiwiki.com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-    group: cert-manager.io
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
