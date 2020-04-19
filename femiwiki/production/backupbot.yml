@@ -4,6 +4,8 @@ metadata:
   name: backupbot
   namespace: femiwiki
 spec:
+  # Disable backupbot during migration from Docker to k8s
+  replicas: 0
   selector:
     matchLabels:
       app: backupbot
