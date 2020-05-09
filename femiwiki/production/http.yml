@@ -8,8 +8,8 @@ metadata:
 spec:
   secretName: acme-crt-secret
   dnsNames:
-    - "*.femiwiki.com"
     - femiwiki.com
+    # TODO issue wildcard domain "*.femiwiki.com" that works only with dns01 challenge
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
@@ -38,7 +38,7 @@ spec:
   tls:
     - hosts:
         - femiwiki.com
-        - "*.femiwiki.com"
+        # TODO issue wildcard domain "*.femiwiki.com" that works only with dns01 challenge
       secretName: acme-crt-secret
 
 ---
