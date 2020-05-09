@@ -14,12 +14,17 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  # TODO Add HSTS header
   name: fastcgi
   namespace: femiwiki
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    ingress.kubernetes.io/force-hsts: "true"
+    ingress.kubernetes.io/hsts-max-age: "15768000"
+    ingress.kubernetes.io/hsts-include-subdomains: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
     - host: femiwiki.com
@@ -28,10 +33,10 @@ spec:
           - backend:
               serviceName: http
               servicePort: 80
-          # Proxy requests to RESTBase
-          # Reference:
-          #   https://www.mediawiki.org/wiki/RESTBase/Installation#Proxy_requests_to_RESTBase_from_your_webserver
-          - path: /femiwiki.com
+          - # Proxy requests to RESTBase
+            # Reference:
+            #   https://www.mediawiki.org/wiki/RESTBase/Installation#Proxy_requests_to_RESTBase_from_your_webserver
+            path: /femiwiki.com
             backend:
               serviceName: restbase
               servicePort: 7231
@@ -40,7 +45,6 @@ spec:
         - femiwiki.com
         # TODO issue wildcard domain "*.femiwiki.com" that works only with dns01 challenge
       secretName: acme-crt-secret
-
 ---
 apiVersion: v1
 kind: Service
