@@ -9,7 +9,7 @@ spec:
   secretName: acme-crt-secret
   dnsNames:
     - femiwiki.com
-    # TODO issue wildcard domain "*.femiwiki.com" that works only with dns01 challenge
+    - "*.femiwiki.com"
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
