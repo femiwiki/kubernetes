@@ -6,6 +6,8 @@ metadata:
 spec:
   issuerRef:
     name: letsencrypt-staging
+  dnsNames:
+    - test.femiwiki.com
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
