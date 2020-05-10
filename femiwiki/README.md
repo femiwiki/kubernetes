@@ -5,12 +5,12 @@ Femiwiki Kubernetes YAML
 
 ```bash
 # Secret 준비하기
-mkdir -p /srv/femiwiki.com/secrets
-curl -s https://raw.githubusercontent.com/femiwiki/kubernetes/master/femiwiki/production/secrets/bot-secret.example.yml -o /srv/femiwiki.com/secrets/bot-secret.yml
-curl -s https://raw.githubusercontent.com/femiwiki/kubernetes/master/femiwiki/production/secrets/secret-local-settings.example.yml -o /srv/femiwiki.com/secrets/secret-local-settings.yml
+sudo mkdir -p /srv/femiwiki.com/secrets
+sudo curl -s https://raw.githubusercontent.com/femiwiki/kubernetes/master/femiwiki/production/secrets/bot-secret.example.yml -o /srv/femiwiki.com/secrets/bot-secret.yml
+sudo curl -s https://raw.githubusercontent.com/femiwiki/kubernetes/master/femiwiki/production/secrets/secret-local-settings.example.yml -o /srv/femiwiki.com/secrets/secret-local-settings.yml
 # 두 파일 수정하기
-vim /srv/femiwiki.com/secrets/bot-secret.yml
-vim /srv/femiwiki.com/secrets/secret-local-settings.yml
+sudo vim /srv/femiwiki.com/secrets/bot-secret.yml
+sudo vim /srv/femiwiki.com/secrets/secret-local-settings.yml
 # Secret 배포하기
 kubectl apply -f https://github.com/femiwiki/kubernetes/raw/master/femiwiki/production/namespace.yml
 kubectl apply -f /srv/femiwiki.com/secrets/
