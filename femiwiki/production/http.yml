@@ -40,11 +40,6 @@ spec:
             backend:
               serviceName: restbase
               servicePort: 7231
-  tls:
-    - hosts:
-        - femiwiki.com
-        # TODO issue wildcard domain "*.femiwiki.com" that works only with dns01 challenge
-      secretName: acme-crt-secret
 ---
 apiVersion: v1
 kind: Service
