@@ -1,15 +1,3 @@
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: femiwiki-com
-  namespace: femiwiki
-spec:
-  dnsNames:
-    - femiwiki.com
-    - "*.femiwiki.com"
-  issuerRef:
-    name: letsencrypt-staging
----
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:

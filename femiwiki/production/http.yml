@@ -1,19 +1,5 @@
 ## TODO: secret.php 등은 https://github.com/bitnami-labs/sealed-secrets 관리하기
 
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: femiwiki-com
-  namespace: femiwiki
-spec:
-  secretName: acme-crt-secret
-  dnsNames:
-    - femiwiki.com
-    - "*.femiwiki.com"
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
----
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -26,6 +12,11 @@ metadata:
     ingress.kubernetes.io/hsts-include-subdomains: "false"
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  tls:
+  - hosts:
+    - femiwiki.com
+    - '*.femiwiki.com'
+    secretName: acme-crt-secret
   rules:
     - host: femiwiki.com
       http:
