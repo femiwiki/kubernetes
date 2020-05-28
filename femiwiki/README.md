@@ -23,6 +23,9 @@ kubectl apply -k ./development
 # 배포될 YAML 확인하기
 kubectl kustomize ./development
 
+# 페미위키 테스트 서버 (https://test.femiwiki.com) 배포하기
+kubectl apply -k github.com/femiwiki/kubernetes/femiwiki/test
+
 # 프로덕션 배포하기
 kubectl apply -k github.com/femiwiki/kubernetes/femiwiki/production
 ```
