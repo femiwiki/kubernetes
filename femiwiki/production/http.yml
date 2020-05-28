@@ -93,8 +93,6 @@ spec:
               mountPath: /etc/Caddyfile
               subPath: Caddyfile
               readOnly: true
-            - name: caddycerts
-              mountPath: /etc/caddycerts
 
       volumes:
         - name: fastcgi
@@ -124,7 +122,3 @@ spec:
         - name: caddyfile
           configMap:
             name: caddyfile
-        - name: caddycerts
-          hostPath:
-            path: /srv/femiwiki.com/caddycerts
-            type: DirectoryOrCreate
