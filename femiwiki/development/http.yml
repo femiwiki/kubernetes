@@ -3,6 +3,11 @@ kind: Ingress
 metadata:
   name: fastcgi
   namespace: femiwiki
+  annotations:
+    cert-manager.io/cluster-issuer:
+    ingress.kubernetes.io/force-hsts: "false"
+    ingress.kubernetes.io/hsts-include-subdomains: "false"
+    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
     - http:
@@ -17,3 +22,4 @@ spec:
             backend:
               serviceName: restbase
               servicePort: 7231
+  tls:
