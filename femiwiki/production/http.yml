@@ -31,6 +31,7 @@ spec:
             backend:
               serviceName: restbase
               servicePort: 7231
+            # TODO Add a path for rest.php. See https://www.mediawiki.org/wiki/Parsoid/PHP
 ---
 apiVersion: v1
 kind: Service
@@ -63,7 +64,7 @@ spec:
       initContainers:
         # https://stackoverflow.com/questions/57061680 solution
         - name: init-fastcgi
-          image: femiwiki/mediawiki:2020-03-27T13-48d5c3bd9a
+          image: femiwiki/mediawiki:2020-03-27T13-48d5c3bd9a # TODO Bump
           volumeMounts:
             - name: fastcgi
               mountPath: /share

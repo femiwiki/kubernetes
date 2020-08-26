@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: restbase
-          image: femiwiki/restbase:build-2
+          image: femiwiki/restbase:build-2 # TODO Bump for Mathoid
 ---
 apiVersion: v1
 kind: Service

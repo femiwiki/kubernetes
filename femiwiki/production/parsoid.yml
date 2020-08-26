@@ -1,3 +1,4 @@
+# TODO Remove, Parsoid is replaced with its PHP version since MW1.35
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -10,4 +10,5 @@ resources:
   - caddyfile.yml
   - parsoid.yml
   - restbase.yml
+  # TODO Deploy Mathoid for upgrading MW to v1.35
   - backupbot.yml
