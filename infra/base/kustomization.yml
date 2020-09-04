@@ -2,4 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - cert-manager.yaml
+  # TODO use remote, See https://github.com/kubernetes-sigs/kustomize/issues/970
+  # TODO bump cert-manager to v1.0.0
 - traefik.yaml
